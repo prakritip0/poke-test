@@ -1,33 +1,14 @@
 import React from 'react';
-import {useFetch} from '../hooks/useFetch';
-import {Link} from 'react-router-dom'
 
-interface PokeCardPropsType {
-  id: number;
+interface PokeCardProps {
+  name: string;
 }
 
-const PokeCard = ({id}: PokeCardPropsType) => {
-  const {data} = useFetch(
-    `https://pokeapi.co/api/v2/pokemon/${id}/`
-  );
-
-
+const PokeCard = ({name}: PokeCardProps) => {
   return (
-    <Link to='/pokeInfo'>
-    <div className='h-[5rem] w-[15rem] bg-red-300 border rounded-lg px-3 py-2 cursor-pointer' >
-      {/* <div className='h-[6rem] w-[6rem] rounded-full overflow-hidden'>
-        <img
-          className='w-[100%] h-[100%]'
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-          alt={data.name}
-        />
-      </div> */}
-      <h2 className='text-white text-lg font-bold'>
-        {data?.name[0]?.toUpperCase() + data?.name?.slice(1)}
-      </h2>
-      <p className='text-white'>Id: {id}</p>
+    <div className='bg-slate-100 px-3 py-4 rounded'>
+      <p>{name}</p>
     </div>
-    </Link>
   );
 };
 

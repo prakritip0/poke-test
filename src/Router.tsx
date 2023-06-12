@@ -1,10 +1,10 @@
 import React from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import App from './App';
 import Home from './pages/Home';
 import ErrorPage from './pages/ErrorPage';
-import PokeInfo from './pages/PokeInfo';
+// import PokeInfo from './pages/PokeInfo';
 import Main from './Main';
+import PokeInfo from './pages/PokeInfo';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -18,7 +18,7 @@ const Router = () => {
           element: <Home />,
         },
         {
-          path: '/pokeInfo',
+          path: '/details/:name',
           element: <PokeInfo />,
         },
       ],

@@ -1,13 +1,32 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import PokeCard from '../components/PokeCard';
+import {useFetch} from '../hooks/useFetch';
+
+interface PokemonsDataType {
+  results: {
+    name: string;
+  }[];
+}
 
 const Home = () => {
-  return (
-    <div className='flex flex-col mx-[10rem] w-full'>
-      <div className='flex flex-wrap w-[80%] mt-[3rem] justify-between'>
-        <PokeCard id={1} />
-        <PokeCard id={2} />
-        <PokeCard id={3} />
+  const {data, isPending} = useFetch<PokemonsDataType>(
+    'https://pokeapi.co/api/v2/pokemon'
+  );
+  console.log(data);
+  return isPending ? (
+    <div>Loading...</div>
+  ) : (
+    <div className='flex flex-col mx-[10%] mt-8'>
+      <div className='grid grid-cols-3 gap-5 w-full'>
+        {data?.results &&
+          data.results.map((result) => {
+            return (
+              <Link key={result.name} to={`./details/${result.name}`}>
+                <PokeCard name={result.name} />
+              </Link>
+            );
+          })}
       </div>
     </div>
   );

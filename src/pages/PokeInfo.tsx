@@ -1,33 +1,37 @@
 import React from 'react';
+import {useParams} from 'react-router';
 import {useFetch} from '../hooks/useFetch';
 
+interface PokeInfoType {
+  id: number;
+  name: string;
+  height: string;
+  weight: string;
+  base_experience: string;
+}
+
 const PokeInfo = () => {
-  const {data} = useFetch(
-    `https://pokeapi.co/api/v2/pokemon/1/`
+  const {name} = useParams();
+  const {data} = useFetch<PokeInfoType>(
+    `https://pokeapi.co/api/v2/pokemon/${name}`
   );
+  console.log(data);
 
   return (
     <div className='mx-[10%] mt-[3rem]'>
-      <div className='bg-red-100 w-[7rem] h-[7rem] rounded-full overflow-hidden'>
+      <div className='w-[7rem] h-[7rem] bg-red-100 border rounded-full'>
         <img
-          className='w-[100%] h-[100%]'
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png
-`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data?.id}.png`}
           alt=''
         />
       </div>
-      <div className='flex flex-col gap-8 mt-10'>
-        <h2>Name: {data.name[0]?.toUpperCase() + data?.name?.slice(1)}</h2>
-        <p>Height: {data.height}</p>
-        <p>Weight: {data.weight}</p>
-        {/* <p>Abilites:{data.abilities.map((ability)=>ability)} </p> */}
-        {/* <p>
-          {data.abilities.map((ability) => {
-           return ability;
-          })}
-        </p> */}
-        {/* <p>{data.abilities.ability.name}</p> */}
-        <p>Base Experience: {data.base_experience}</p>
+      <div className='flex flex-col gap-8 mt-4'>
+        <p className='font-bold'>
+          {data!.name[0]?.toUpperCase() + data?.name.slice(1)}
+        </p>
+        <p>Height: {data?.height}</p>
+        <p>Weight: {data?.weight}</p>
+        <p>Base Experience : {data?.base_experience}</p>
       </div>
     </div>
   );
