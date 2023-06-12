@@ -1,5 +1,6 @@
 import React from 'react';
 import {useParams} from 'react-router';
+import PokemonDetails from '../components/PokemonDetails';
 import {useFetch} from '../hooks/useFetch';
 
 interface PokeInfoType {
@@ -11,11 +12,10 @@ interface PokeInfoType {
 }
 
 const PokeInfo = () => {
-  
   const {name} = useParams();
   console.log(name);
-  
-  const {data} =  useFetch<PokeInfoType>(
+
+  const {data} = useFetch<PokeInfoType>(
     `https://pokeapi.co/api/v2/pokemon/${name}`
   );
   console.log(data, name);
@@ -28,14 +28,12 @@ const PokeInfo = () => {
           alt=''
         />
       </div>
-      <div className='flex flex-col gap-8 mt-4'>
-        <p className='font-bold'>
-          {!!data && data.name[0]?.toUpperCase() + data?.name.slice(1)}
-        </p>
-        <p>Height: {data?.height}</p>
-        <p>Weight: {data?.weight}</p>
-        <p>Base Experience : {data?.base_experience}</p>
-      </div>
+      <PokemonDetails
+        name={!!data && data.name[0]?.toUpperCase() + data?.name.slice(1)}
+        height={data?.height}
+        weight={data?.weight}
+        base_experience={data?.base_experience}
+      />
     </div>
   );
 };
