@@ -1,14 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface PokeCardProps {
   name: string;
+  routeName:string
 }
 
-const PokeCard = ({name}: PokeCardProps) => {
+const PokeCard = ({name, routeName}: PokeCardProps) => {
+  console.log('Name', name, 'route', routeName);
+  
   return (
-    <div className='bg-slate-100 px-3 py-4 rounded'>
-      <p>{name}</p>
-    </div>
+    <Link data-testid='pokemon-card' to={`/details/${routeName}`}>
+      <div className='bg-slate-100 px-3 py-5 rounded'>
+        <p>{name}</p>
+      </div>
+    </Link>
   );
 };
 

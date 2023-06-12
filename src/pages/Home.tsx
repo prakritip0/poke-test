@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import { resourceLimits } from 'worker_threads';
 import PokeCard from '../components/PokeCard';
 import {useFetch} from '../hooks/useFetch';
 
@@ -27,11 +28,9 @@ const Home = () => {
         {data?.results &&
           data.results.map((result) => {
             return (
-              <Link key={result.name} to={`./details/${result.name}`}>
-                <PokeCard
-                  name={result.name[0].toUpperCase() + result.name.slice(1)}
-                />
-              </Link>
+              <PokeCard
+               key={result.name} name={result.name[0].toUpperCase() + result.name.slice(1)} routeName={result.name}
+              />
             );
           })}
       </div>
@@ -39,7 +38,7 @@ const Home = () => {
         <button
           disabled={!page ? true : false}
           className={`px-2 py-1 ${
-            !page ? 'bg-slate-100 ': 'bg-slate-200'
+            !page ? 'bg-slate-100 ' : 'bg-slate-200'
           } rounded-full`}
           onClick={() => setPage(page - 1)}
         >

@@ -11,11 +11,14 @@ interface PokeInfoType {
 }
 
 const PokeInfo = () => {
+  
   const {name} = useParams();
-  const {data} = useFetch<PokeInfoType>(
+  console.log(name);
+  
+  const {data} =  useFetch<PokeInfoType>(
     `https://pokeapi.co/api/v2/pokemon/${name}`
   );
-  console.log(data);
+  console.log(data, name);
 
   return (
     <div className='mx-[10%] mt-[3rem]'>
@@ -27,7 +30,7 @@ const PokeInfo = () => {
       </div>
       <div className='flex flex-col gap-8 mt-4'>
         <p className='font-bold'>
-          {data!.name[0]?.toUpperCase() + data?.name.slice(1)}
+          {!!data && data.name[0]?.toUpperCase() + data?.name.slice(1)}
         </p>
         <p>Height: {data?.height}</p>
         <p>Weight: {data?.weight}</p>
