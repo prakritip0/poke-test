@@ -1,17 +1,28 @@
 import React from 'react';
-import { useFetch } from '../hooks/useFetch';
+import {useFetch} from '../hooks/useFetch';
 
-interface PokeCardPropsType{
-    id:number
+interface PokeCardPropsType {
+  id: number;
 }
 
-const PokeCard = ({id}:PokeCardPropsType) => {
-    const {data, isPending, error}=useFetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-    console.log(data.name, isPending, error);
-    
+const PokeCard = ({id}: PokeCardPropsType) => {
+  const {data, isPending, error} = useFetch(
+    `https://pokeapi.co/api/v2/pokemon/${id}/`
+  );
+  console.log(data, id);
+
   return (
-    <div className='h-[13rem] w-[25rem] bg-red-300 border rounded-lg'>
-      {/* <h2>{data?.name}</h2> */}
+    <div className='h-[13rem] w-[25rem] bg-red-300 border rounded-lg px-3 py-2'>
+      <div className='h-[6rem] w-[6rem] rounded-full overflow-hidden'>
+        <img
+          className='w-[100%] h-[100%]'
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+          alt={data.name}
+        />
+      </div>
+      <h2 className='text-white text-lg font-bold'>
+        {/* {data?.name[0].toUpperCase() + data?.name?.slice(1)} */}
+      </h2>
     </div>
   );
 };
