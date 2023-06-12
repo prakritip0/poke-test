@@ -7,18 +7,14 @@ interface PokeCardPropsType {
 }
 
 const PokeCard = ({id}: PokeCardPropsType) => {
-  const {data, isPending, error} = useFetch(
+  const {data} = useFetch(
     `https://pokeapi.co/api/v2/pokemon/${id}/`
   );
-  console.log(isPending, error);
 
-const displayPokeInfo=()=>{
-console.log(id, data.name);
-}
 
   return (
     <Link to='/pokeInfo'>
-    <div className='h-[5rem] w-[15rem] bg-red-300 border rounded-lg px-3 py-2 cursor-pointer' onClick={displayPokeInfo}>
+    <div className='h-[5rem] w-[15rem] bg-red-300 border rounded-lg px-3 py-2 cursor-pointer' >
       {/* <div className='h-[6rem] w-[6rem] rounded-full overflow-hidden'>
         <img
           className='w-[100%] h-[100%]'

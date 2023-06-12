@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 export const useFetch = (url: string) => {
-  const [data, setData] = useState({name: ''});
+  const [data, setData] = useState({name: '', height:'', weight:'', abilities:[], base_experience:''});
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<null|string>();
   useEffect(() => {
