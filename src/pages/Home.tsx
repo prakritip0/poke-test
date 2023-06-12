@@ -23,7 +23,7 @@ const Home = () => {
           data.results.map((result) => {
             return (
               <Link key={result.name} to={`./details/${result.name}`}>
-                <PokeCard name={result.name} />
+                <PokeCard name={(result.name[0]).toUpperCase()+ result.name.slice(1)} />
               </Link>
             );
           })}
