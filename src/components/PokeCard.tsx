@@ -6,8 +6,8 @@ interface PokeCardPropsType{
 }
 
 const PokeCard = ({id}:PokeCardPropsType) => {
-    const {data, isPending}=useFetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-    console.log(data.name);
+    const {data, isPending, error}=useFetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+    console.log(data.name, isPending, error);
     
   return (
     <div className='h-[13rem] w-[25rem] bg-red-300 border rounded-lg'>
